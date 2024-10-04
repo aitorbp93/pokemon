@@ -7,7 +7,7 @@ const move = require('./move');
 const type = require('./type');
 
 
-//creamos los movimientos
+//creamos los moves
 const movimiento1 = new move('Trueno', 50);
 const movimiento2 = new move('Tornado', 40);
 const movimiento3 = new move('Golpe Roca', 35);
@@ -40,10 +40,9 @@ const pokemons = [
 ];
 
 //funcion para selecionar un pokemon al azar
-
 function seleccionarPokemon() {
     const pokemonAzar = pokemons[Math.floor(Math.random() * pokemons.length)];
-    return pokemons[pokemonAzar];
+    return pokemonAzar;
 }
 
 
@@ -51,9 +50,10 @@ function seleccionarPokemon() {
 
 function batalla(jugador, maquina) {
    
+  
+    
 
-
-    console.log(`Empieza ${jugador} contra ${maquina}`);
+    console.log(`Empieza ${jugador.nombre} contra ${maquina.nombre}`);
 
     while (jugador.hpActual > 0 && maquina.hpActual > 0) {
 
@@ -65,31 +65,27 @@ function batalla(jugador, maquina) {
         console.log('2. Curar');
 
         const opcion = readlineSync.questionInt();
-        if (opcion === '2' && jugador.hpActual === jugador.hpMax) {
+        if (opcion === '2' ) {
             jugador.heal();
-        } else {
-            console.log('No puedes curar');
-        } elseif(opcion === '1'); {
+        
+        }else{
             console.log('¿Que ataque quieres hacer?');
-            console.log('Movimientos disponibles:');
-            jugador.moves.forEach((move, index) => {
-                console.log(`${index + 1}. ${move.nombre}`);
-            });
-
-            const opcionAtaque = parseInt(readlineSync.question('Selecciona el número del movimiento: ')) - 1;
+            console.log('Movientos disponibles:');
+            console.log(jugador.moves[0]);
+            console.log(jugador.moves[1]);
+            const opcionAtaque = readlineSync.questionInt();
 
             switch (opcionAtaque) {
                 case 0:
-                    jugador.atacar(jugador.movimientos[0], maquina);
+                    jugador.atacar(jugador.moves[0], maquina);
                     break;
                 case 1:
-                    jugador.atacar(jugador.movimientos[1], maquina);
+                    jugador.atacar(jugador.moves[1], maquina);
                     break;
                 default:
                     console.log('Opción no válida.');
-            }
-
-            if (maquina.hpActual <= 0) {
+            }}
+             if (maquina.hpActual <= 0) {
                 console.log(`${maquina.nombre} ha sido derrotado. ¡${jugador.nombre} gana!`);
 
             } else {
@@ -99,8 +95,7 @@ function batalla(jugador, maquina) {
                 const moveMaquina = Math.floor(Math.random() * maquina.moves.length);
 
 
-                maquina.atacar(maquina.move[moveMaquina], jugador);
-
+                maquina.atacar(maquina.moves[moveMaquina], jugador);
                 // Verificar si el jugador ha sido derrotado
                 if (jugador.hpActual <= 0) {
                     console.log(`${jugador.nombre} ha sido derrotado. ¡${maquina.nombre} gana!`);
@@ -109,7 +104,7 @@ function batalla(jugador, maquina) {
 
             }
 
-        }
+        
 
 
 
@@ -117,18 +112,23 @@ function batalla(jugador, maquina) {
 
     }
 
-     jugador = pokemonAzar();  // Seleccionamos el Pokémon del jugador
-    maquina = pokemonAzar();
-   
+    
 
-    while (jugador.nombre === pokemonMaquina.nombre) {
+    while (jugador.nombre === maquina.nombre) {
        maquina = pokemonAzar();
     }
  
-    console.log(`El Pokémon del jugador es ${pokemonJugador.nombre}.`);
-    console.log(`El Pokémon de la máquina es ${pokemonMaquina.nombre}.`);
-    batalla(jugador, maquina);
+    console.log(`El Pokémon del jugador es ${jugador.nombre}.`);
+    console.log(`El Pokémon de la máquina es ${maquina.nombre}.`);
+     
 }
+
+
+const jugador = seleccionarPokemon();  
+    const maquina = seleccionarPokemon(); 
+    
+batalla(jugador, maquina); 
+
 
 
 

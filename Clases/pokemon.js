@@ -1,4 +1,5 @@
 
+const move = require('./move');
 const Movimiento = require('./move');
 const Tipo = require('./type');
 
@@ -20,8 +21,8 @@ class pokemon {
     //metodo para atacar
     atacar(movimiento, maquina) {
         const factorAleatorio = Math.random() * (1.0 - 0.85) + 0.85;
-        const danio = Math.max(1, (this.ataque / maquina.defensa) * factorAleatorio);
-        maquina.hpActual = Math.max(0, maquina.hpActual - danio);
+        const danio = Math.max(1, (this.ataque / maquina.defensa) *movimiento.damege * factorAleatorio);
+        maquina.hpActual = Math.max(0, maquina.hpActual - Math.floor(danio));
 
         console.log(`${this.nombre} usa ${movimiento} y le hace ${danio} a ${maquina.nombre}`);
 
