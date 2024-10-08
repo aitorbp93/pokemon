@@ -24,7 +24,7 @@ class pokemon {
         const danio = Math.max(1, (this.ataque / maquina.defensa) *movimiento.damege * factorAleatorio);
         maquina.hpActual = Math.max(0, maquina.hpActual - Math.floor(danio));
 
-        console.log(`${this.nombre} usa ${movimiento} y le hace ${danio} a ${maquina.nombre}`);
+        console.log(`${this.nombre} usa ${movimiento.nombreMove} y le hace ${danio} a ${maquina.nombre}`);
 
     }
 
