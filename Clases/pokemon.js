@@ -22,8 +22,8 @@ class Pokemon {
     // Método de curar
     heal() {
         if (!this.curado) {
-            const healAmount = Math.floor(this.hpMax * 0.5);
-            this.hpActual = Math.min(this.hpMax, this.hpActual + healAmount);
+            const curacion = Math.floor(this.hpMax * 0.5);
+            this.hpActual = Math.min(this.hpMax, this.hpActual + curacion);
             this.curado = true;
             console.log(`${this.nombre} se ha curado y ahora tiene ${this.hpActual} de vida.`);
         } else {
