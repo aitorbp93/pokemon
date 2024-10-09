@@ -1,12 +1,4 @@
-
-const move = require('./move');
-const Movimiento = require('./move');
-const Tipo = require('./type');
-
-
-
-
-class pokemon {
+class Pokemon {
     constructor(nombre, tipo, hpMax, ataque, defensa, moves) {
         this.nombre = nombre;
         this.tipo = tipo;
@@ -18,36 +10,26 @@ class pokemon {
         this.curado = false;
     }
 
-    //metodo para atacar
-    atacar(movimiento, maquina) {
+    // Método para atacar
+    atacar(movimiento, oponente) {
         const factorAleatorio = Math.random() * (1.0 - 0.85) + 0.85;
-        const danio = Math.max(1, (this.ataque / maquina.defensa) *movimiento.damege * factorAleatorio);
-        maquina.hpActual = Math.max(0, maquina.hpActual - Math.floor(danio));
+        const danio = Math.max(1, (this.ataque / oponente.defensa) * movimiento.damege * factorAleatorio);
+        oponente.hpActual = Math.max(0, oponente.hpActual - Math.floor(danio));
 
-        console.log(`${this.nombre} usa ${movimiento.nombreMove} y le hace ${danio} a ${maquina.nombre}`);
-
+        console.log(`${this.nombre} usa ${movimiento.nombreMove} y le hace ${Math.floor(danio)} de daño a ${oponente.nombre}`);
     }
 
-    //metodo de curar
-
+    // Método de curar
     heal() {
         if (!this.curado) {
-            this.hpActual = Math.min(this.hpMax, this.hpActual + this.hpmax * 0.5);
+            const healAmount = Math.floor(this.hpMax * 0.5);
+            this.hpActual = Math.min(this.hpMax, this.hpActual + healAmount);
             this.curado = true;
-            console.log(`${this.nombre} se ha curado y ahora tiene ${this.hpActual} de vida`);
+            console.log(`${this.nombre} se ha curado y ahora tiene ${this.hpActual} de vida.`);
+        } else {
+            console.log(`${this.nombre} ya no puede curarse nuevamente.`);
         }
-        else {
-            console.log(`${this.nombre} ya estaba curado`);
-
-        }
-
-
-
     }
-
-
-
-
-
 }
-module.exports = pokemon;
+
+module.exports = Pokemon;
